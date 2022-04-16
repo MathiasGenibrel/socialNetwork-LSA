@@ -7,8 +7,8 @@ use App\Entity\Comments;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class CommentsType extends AbstractType
@@ -17,14 +17,15 @@ class CommentsType extends AbstractType
     {
         $date = date('Y-m-d H:i:s');
         $builder
-            ->add('created_date',DateTimeType::class,[
-                'attr' => ['hidden' => true, 'value'=> $date],
-                'label' => false
-            ])
+            // ->add('created_date',DateTimeType::class,[
+            //     'attr' => ['hidden' => true, 'value'=> $date],
+            //     'label' => false
+            // ])
             ->add('message',TextAreaType::class,[
                 'attr' => ['class' =>'form-control']
                 ])
-            ->add('post')
+            // ->add('post', HiddenType::class)
+            // ->add('post')
         ;
     }
 

@@ -50,8 +50,13 @@ class PostsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setPost($post);
+            $date = new \DateTime();
+            $date->format("Y-m-d H:i:s");
+            $comment->setCreatedDate( $date );
             $commentsRepository->add($comment);
-            return $this->redirectToRoute('app_comments_index', [], Response::HTTP_SEE_OTHER);
+            header("Refresh:0");
+            // return $this->redirectToRoute('app_comments_index', [], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('posts/show.html.twig', [
             'post' => $post,

@@ -13,11 +13,26 @@ class Comments
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'date')]
+    #[ORM\Column(type: 'datetime')]
     private $created_date;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private $message;
+
+    #[ORM\ManyToOne(targetEntity: Posts::class, inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $post;
+
+    public function __toString()
+    {
+        return $this->message;
+    }
+
+    public function __construct()
+    {
+        $this->created_date = new \DateTime();
+        $this->created_date->format("Y-m-d H:i:s");
+    }
 
     public function getId(): ?int
     {
@@ -44,6 +59,18 @@ class Comments
     public function setMessage(?string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getPost(): ?Posts
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Posts $post): self
+    {
+        $this->post = $post;
 
         return $this;
     }

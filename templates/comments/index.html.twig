@@ -18,7 +18,7 @@
         {% for comment in comments %}
             <tr>
                 <td>{{ comment.id }}</td>
-                <td>{{ comment.createdDate ? comment.createdDate|date('Y-m-d') : '' }}</td>
+                <td>{{ comment.createdDate ? comment.createdDate|date('d-m-Y H:i:s') : '' }}</td>
                 <td>{{ comment.message }}</td>
                 <td>
                     <a href="{{ path('app_comments_show', {'id': comment.id}) }}">show</a>

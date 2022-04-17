@@ -51,6 +51,7 @@ class PostsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setPost($post);
+            date_default_timezone_set('Europe/Paris');
             $date = new \DateTime();
             $date->format("Y-m-d H:i:s");
             $comment->setCreatedDate( $date );

@@ -13,7 +13,9 @@ class PostsType extends AbstractType
     {
         $builder
             ->add('created_date')
+            ->add('title')
             ->add('description')
+            ->add('fk_board')
         ;
     }
 

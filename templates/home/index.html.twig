@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('build/styles/home.css') }}">
+    {{ encore_entry_link_tags('home') }}
 {% endblock %}
 
 {% block title %}Home{% endblock %}

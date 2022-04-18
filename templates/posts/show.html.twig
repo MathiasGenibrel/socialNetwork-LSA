@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('build/styles/post.css') }}">
+    {{ encore_entry_link_tags('post') }}
 {% endblock %}
 {% block title %}Posts{% endblock %}
 

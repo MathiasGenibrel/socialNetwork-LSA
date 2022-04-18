@@ -1,17 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Join Rise Community
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+	<section class="connection__page">
+		<article>
+			<img src="{{ asset("assets/images/connection.svg") }}" alt="Connection with Rise Team's">
+			<h2>Start for free and get all news about Rise Team's.</h2>
+		</article>
+		<article>
+			<form method="post" class="form--connection">
+				<h1>Get's started.</h1>
+				<p>Already have an account ?
+					<a href={{ path("app_login")}}>Login</a>
+				</p>
+				<img src="{{ asset('assets/svg/Logo_Complete_dark.svg') }}" alt="logo">
+				<p>News and all the updates from the Rise™ studio at your fingertips</p>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+				<label for="registration_form_email">
+					<p>Email</p>
+					<div>
+						<img src="{{ asset('assets/icons/Mail.svg') }}" alt="email">
+						<input type="email" id="registration_form_email" name="registration_form[email]" maxlength="180" autocomplete="email" value="{{ emailLastValue }}" autofocus required>
+					</div>
+				</label>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+				<label for="registration_form_plainPassword">
+					<p>Password</p>
+					<div>
+						<img src="{{ asset('assets/icons/Lock.svg') }}" alt="password">
+						<input type="password" id="registration_form_plainPassword" name="registration_form[plainPassword]" required autocomplete="new-password">
+						<img id="passwordHide" src="{{ asset('assets/icons/Hide.svg') }}" alt="password hidden">
+						<img id="passwordShow" hidden src="{{ asset('assets/icons/Show.svg') }}" alt="password hidden">
+					</div>
+				</label>
+
+				<label for="agreeTerms">
+					<input type="checkbox" id="agreeTerms" name="registration_form[agreeTerms]" required>
+					<span>agreeTerms</span>
+				</label>
+
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
+
+				<button type="submit">
+					Join Community
+				</button>
+			</form>
+			<p>Rise Team's © 2022</p>
+		</article>
+	</section>
+	{# {% for item in registrationForm.email %}
+					<p>item</p>
+				{% endfor %}
+				{{ form_start(registrationForm) }}
+				{{ form_row(registrationForm.email) }}
+				{{ form_row(registrationForm.plainPassword, {
+			            label: 'Password'
+			        }) }}
+				{{ form_row(registrationForm.agreeTerms) }}
+			
+				<button type="submit" class="btn">Register</button>
+				{{ form_end(registrationForm) }} #}
 {% endblock %}

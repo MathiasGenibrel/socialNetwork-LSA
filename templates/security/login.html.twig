@@ -1,42 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Log in - Rise Community
+{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+	<section class="connection__page">
+		<article>
+			<img src="{{ asset("assets/images/connection.svg") }}" alt="Connection with Rise Team's">
+			<h2>Start for free and get all news about Rise Team's.</h2>
+		</article>
+		<article>
+			<form method="post" class="form--connection">
+				{% if error %}
+					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+				{% if app.user %}
+					<div class="mb-3">
+						You are logged in as
+						{{ app.user.username }},
+						<a href="{{ path('app_logout') }}">Logout</a>
+					</div>
+				{% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+				<h1>Hi again !</h1>
+				<p>You don't have any account ?
+					<a href={{ path("app_register")}}>Register now</a>
+				</p>
+				<img src="{{ asset('assets/svg/Logo_Complete_dark.svg') }}" alt="logo">
+				<p>News and all the updates from the Rise™ studio at your fingertips</p>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+				<label for="inputEmail">
+					<p>Email</p>
+					<div>
+						<img src="{{ asset('assets/icons/Mail.svg') }}" alt="email">
+						<input type="email" value="{{ last_username }}" name="email" id="inputEmail" autocomplete="email" required autofocus>
+					</div>
+				</label>
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
+				<label for="inputEmail">
+					<p>Password</p>
+					<div>
+						<img src="{{ asset('assets/icons/Lock.svg') }}" alt="password">
+						<input type="password" name="password" id="inputPassword" autocomplete="current-password" required>
+						<img id="passwordHide" src="{{ asset('assets/icons/Hide.svg') }}" alt="password hidden">
+						<img id="passwordShow" hidden src="{{ asset('assets/icons/Show.svg') }}" alt="password hidden">
+					</div>
+				</label>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+				<button type="submit">
+					Login
+				</button>
+			</form>
+      <p>Rise Team's © 2022</p>
+		</article>
+	</section>
 {% endblock %}

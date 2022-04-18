@@ -1,0 +1,98 @@
+.connection__page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+}
+
+.connection__page article {
+  position: relative;
+  width: 50%;
+}
+
+.connection__page article:first-child {
+  background: url(../images/Background--Connection.png),
+    linear-gradient(150.09deg, #d83136 45.96%, #b42226 117.58%);
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 44px;
+  justify-content: center;
+  align-items: center;
+}
+
+.connection__page article:first-child img {
+  position: relative;
+  left: 46px;
+  max-width: 652px;
+  width: 100%;
+}
+
+.connection__page article:first-child h2 {
+  color: var(--secondary-color);
+  max-width: 290px;
+  text-align: center;
+}
+
+.connection__page article p:last-child {
+  filter: opacity(0.6);
+  position: absolute;
+  margin: 0 auto;
+  width: fit-content;
+  inset: auto 0 4px 0;
+  font-weight: 600;
+}
+
+.form--connection {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 84px auto 0 auto;
+  max-width: 500px;
+  width: 100%;
+}
+
+.form--connection input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+}
+
+.form--connection > img {
+  margin: 128px auto 64px auto;
+}
+
+.form--connection > img + p {
+  margin-bottom: 32px;
+}
+
+.form--connection label {
+  margin-bottom: 16px;
+}
+
+.form--connection label div {
+  border-radius: 4px;
+  background-color: none;
+  border: 1px solid var(--tertiary-color);
+  padding: 8px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.form--connection button {
+  border-radius: 4px;
+  background: linear-gradient(150.09deg, #d83136 45.96%, #b42226 117.58%);
+  max-width: 240px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 36px;
+  outline: none;
+  border: none;
+  color: var(--secondary-color);
+  margin: 48px auto 0 auto;
+}

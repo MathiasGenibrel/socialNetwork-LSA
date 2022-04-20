@@ -5,10 +5,14 @@ namespace App\Controller;
 use App\Entity\Board;
 use App\Form\BoardType;
 use App\Repository\BoardRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 
 #[Route('/board')]
 class BoardController extends AbstractController
@@ -22,7 +26,7 @@ class BoardController extends AbstractController
     }
 
     #[Route('/new', name: 'app_board_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, BoardRepository $boardRepository): Response
+    public function new(Request $request, BoardRepository $boardRepository, SluggerInterface $slugger): Response
     {
         $board = new Board();
         $form = $this->createForm(BoardType::class, $board);
@@ -30,6 +34,26 @@ class BoardController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $boardRepository->add($board);
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                // Move the file to the directory where images are stored
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                $board->setImage($newFilename);
+            }
             return $this->redirectToRoute('app_board_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -48,13 +72,42 @@ class BoardController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_board_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Board $board, BoardRepository $boardRepository): Response
+    public function edit(Request $request, Board $board, BoardRepository $boardRepository,SluggerInterface $slugger): Response
     {
         $form = $this->createForm(BoardType::class, $board);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $board->setImage($_FILES['board']['name']['image']);
+          
             $boardRepository->add($board);
+            
+            $file_name = $_FILES['board']['name']['image'];
+            $destination = $this->getParameter('images_directory');
+            move_uploaded_file($_FILES['board']['tmp_name']['image'], $destination . $file_name);
+            // $boardRepository->add($board); 
+            // $imageFile = $form->get('image')->getData();
+            // if ($imageFile) {
+            //     $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            //     // this is needed to safely include the file name as part of the URL
+            //     // $safeFilename = $slugger->slug($originalFilename);
+            //     $newFilename = '-'.uniqid().'.'.$imageFile->guessExtension();
+
+            //     // Move the file to the directory where images are stored
+            //     try {
+            //         $imageFile->move(
+            //             $this->getParameter('images_directory'),
+            //             $newFilename
+            //         );
+            //     } catch (FileException $e) {
+            //         // ... handle exception if something happens during file upload
+            //     }
+            //     // $board->setImage(
+            //     //     new File($this->getParameter('images_directory').'/'.$board->getImage())
+            //     // );               
+            //      // var_dump($newFilename);
+            //     // exit;
+            // }
             return $this->redirectToRoute('app_board_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -64,7 +117,7 @@ class BoardController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_board_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_board_delete', methods: ['POST'])]
     public function delete(Request $request, Board $board, BoardRepository $boardRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$board->getId(), $request->request->get('_token'))) {

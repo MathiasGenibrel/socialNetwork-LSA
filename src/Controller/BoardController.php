@@ -33,27 +33,13 @@ class BoardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $board->setImage($_FILES['board']['name']['image']);
+          
             $boardRepository->add($board);
-            /** @var UploadedFile $imageFile */
-            $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
-
-                // Move the file to the directory where images are stored
-                try {
-                    $imageFile->move(
-                        $this->getParameter('images_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-
-                $board->setImage($newFilename);
-            }
+            
+            $file_name = $_FILES['board']['name']['image'];
+            $destination = $this->getParameter('images_directory');
+            move_uploaded_file($_FILES['board']['tmp_name']['image'], $destination . $file_name);
             return $this->redirectToRoute('app_board_index', [], Response::HTTP_SEE_OTHER);
         }
 

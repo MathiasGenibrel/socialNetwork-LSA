@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('build/styles/post.css') }}">
+    {{ encore_entry_link_tags('post') }}
 {% endblock %}
 {% block title %}Posts{% endblock %}
 
@@ -27,7 +27,7 @@
     </table>
     
     {% for comment in post.comments %}
-        <p>{{ comment }} <small >{{ comment.createdDate|date('j F, Y, g:i a') }}</small></p>
+        <p>{{ comment }}<small >{{ comment.createdDate|date('j F, Y, g:i a') }}</br>posted by: {{ comment.postedBy }}</small></p>
         </br>
     {% endfor %}
     {{ include('comments/_form.html.twig') }}

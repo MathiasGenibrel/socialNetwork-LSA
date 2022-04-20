@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('build/styles/home.css') }}">
+    {{ encore_entry_link_tags('home') }}
 {% endblock %}
 
 {% block title %}Home{% endblock %}
@@ -13,10 +13,10 @@
         {% for board in boards %}
             <div class="col" ontouchstart="this.classList.toggle('hover');">
                 <div class="container">
-                    <div class="front" style="background-image: url(https://unsplash.it/500/500/)">
+                    <div class="front" style="background-image: url({{ asset('uploads/images/' ~ board.image) }})">
                         <div class="inner">
                             <p>{{ board.name}}</p>
-                <span>Lorem ipsum</span>
+
                         </div>
                     </div>
                     <div class="back">

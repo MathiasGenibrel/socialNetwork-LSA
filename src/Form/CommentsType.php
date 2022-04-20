@@ -26,6 +26,7 @@ class CommentsType extends AbstractType
                 ])
             // ->add('post', HiddenType::class)
             // ->add('post')
+            // ->add('posted_by')
         ;
     }
 

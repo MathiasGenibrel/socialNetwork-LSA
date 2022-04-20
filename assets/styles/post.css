@@ -3,6 +3,7 @@ body{
 }
 
 p{
+    color: #19323C;
     width: 800px;
     border: 1px solid black;
     border-radius: 25px;
@@ -11,11 +12,11 @@ p{
 }
 
 p > small {
-    color: white;
+    color: #F3F7F0;
     display: block;
     text-align: right;
 }
 
 textarea  {
-    background-color: #65AFFF;
+    background-color: #5899E2;
 }

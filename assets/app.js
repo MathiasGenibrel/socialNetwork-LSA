@@ -15,11 +15,8 @@ import "./styles/fontStyles.css";
 import "./styles/formConnection.css";
 
 // import "./styles/app.css";
-
-import './styles/app.scss';
-
-import './styles/post.css';
-
+// import './styles/app.scss';
+// import './styles/post.css';
 
 // start the Stimulus application
 import "./bootstrap";

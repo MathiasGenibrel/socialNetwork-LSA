@@ -1,8 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Log in - Rise Community
+{% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
+	<section class="connection__page">
+		<article>
+			<img src="{{ asset("assets/images/connection.svg") }}" alt="Connection with Rise Team's">
+			<h2>Start for free and get all news about Rise Team's.</h2>
+		</article>
+		<article>
+			<form method="post" class="form--connection">
+				{% if error %}
+					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
+
+				{% if app.user %}
+					<div class="mb-3">
+						You are logged in as
+						{{ app.user.username }},
+						<a href="{{ path('app_logout') }}">Logout</a>
+					</div>
+				{% endif %}
+
+				<h1>Hi again !</h1>
+				<p>You don't have any account ?
+					<a href={{ path("app_register")}}>Register now</a>
+				</p>
+				<img src="{{ asset('assets/svg/Logo_Complete_dark.svg') }}" alt="logo">
+				<p>News and all the updates from the Rise™ studio at your fingertips</p>
+
+				<label for="inputEmail">
+					<p>Email</p>
+					<div>
+						<img src="{{ asset('assets/icons/Mail.svg') }}" alt="email">
+						<input type="email" value="{{ last_username }}" name="email" id="inputEmail" autocomplete="email" required autofocus>
+					</div>
+				</label>
+
+				<label for="inputPassword">
+					<p>Password</p>
+					<div>
+						<img src="{{ asset('assets/icons/Lock.svg') }}" alt="password">
+						<input type="password" name="password" id="inputPassword" autocomplete="current-password" required>
+						<img id="passwordHide" src="{{ asset('assets/icons/Hide.svg') }}" alt="password hidden">
+						<img id="passwordShow" hidden src="{{ asset('assets/icons/Show.svg') }}" alt="password hidden">
+					</div>
+				</label>
+
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				<button type="submit">
+					Login
+				</button>
+			</form>
+      <p>Rise Team's © 2022</p>
+		</article>
+	</section>
+=======
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -37,4 +93,5 @@
         Sign in
     </button>
 </form>
+>>>>>>> main
 {% endblock %}

@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('build/styles/post.css') }}">
+{% endblock %}
 {% block title %}Posts{% endblock %}
 
+
+
 {% block body %}
-    <h1>Posts</h1>
+    <h1 class="text-center"> Post: {{ post.title }} </h1>
 
     <table class="table">
         <tbody>
@@ -13,7 +17,7 @@
             </tr>
             <tr>
                 <th>Created_date</th>
-                <td>{{ post.createdDate ? post.createdDate|date('Y-m-d') : '' }}</td>
+                <td>{{ post.createdDate ? post.createdDate|date('"F j, Y, g:i a"') : '' }}</td>
             </tr>
             <tr>
                 <th>Description</th>
@@ -21,7 +25,14 @@
             </tr>
         </tbody>
     </table>
+    
+    {% for comment in post.comments %}
+        <p>{{ comment }} <small >{{ comment.createdDate|date('j F, Y, g:i a') }}</small></p>
+        </br>
+    {% endfor %}
+    {{ include('comments/_form.html.twig') }}
 
+    
     <a href="{{ path('app_posts_index') }}">back to list</a>
 
     <a href="{{ path('app_posts_edit', {'id': post.id}) }}">edit</a>

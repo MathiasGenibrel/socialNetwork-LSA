@@ -1,0 +1,21 @@
+body{
+    margin: 2%;
+}
+
+p{
+    width: 800px;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 20px;
+    background-color: #65AFFF;
+}
+
+p > small {
+    color: white;
+    display: block;
+    text-align: right;
+}
+
+textarea  {
+    background-color: #65AFFF;
+}

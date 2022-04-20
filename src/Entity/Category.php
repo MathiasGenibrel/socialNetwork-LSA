@@ -29,6 +29,10 @@ class Category
         $this->boards_list = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {

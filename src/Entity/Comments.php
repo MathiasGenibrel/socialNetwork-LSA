@@ -23,6 +23,10 @@ class Comments
     #[ORM\JoinColumn(nullable: false)]
     private $post;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $posted_by;
+
     public function __toString()
     {
         return $this->message;
@@ -71,6 +75,18 @@ class Comments
     public function setPost(?Posts $post): self
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    public function getPostedBy(): ?User
+    {
+        return $this->posted_by;
+    }
+
+    public function setPostedBy(?User $posted_by): self
+    {
+        $this->posted_by = $posted_by;
 
         return $this;
     }

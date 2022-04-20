@@ -5,13 +5,18 @@ namespace App\Controller;
 use App\Entity\Posts;
 use App\Form\PostsType;
 use App\Entity\Comments;
+use App\Entity\User;
 use App\Form\CommentsType;
 use App\Repository\PostsRepository;
 use App\Repository\CommentsRepository;
+use ContainerObudBMh\getUserService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 #[Route('/posts')]
 class PostsController extends AbstractController
@@ -43,6 +48,7 @@ class PostsController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_posts_show', methods: ['GET','POST'])]
+    // #[ParamConverter('post', options:['id' => 'id'])]
     public function show(Posts $post,Request $request, CommentsRepository $commentsRepository): Response
     {
         $comment = new Comments();
@@ -50,11 +56,13 @@ class PostsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
             $comment->setPost($post);
             date_default_timezone_set('Europe/Paris');
             $date = new \DateTime();
             $date->format("Y-m-d H:i:s");
             $comment->setCreatedDate( $date );
+            $comment->setPostedBy($user);
             $commentsRepository->add($comment);
             header("Refresh:0");
             // return $this->redirectToRoute('app_comments_index', [], Response::HTTP_SEE_OTHER);
@@ -83,7 +91,7 @@ class PostsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_posts_delete', methods: ['POST'])]
+    #[Route('/{id}/', name: 'app_posts_delete', methods: ['POST'])]
     public function delete(Request $request, Posts $post, PostsRepository $postsRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {

@@ -17,7 +17,7 @@
 			<h2>Start for free and get all news about Rise Team's.</h2>
 		</article>
 		<article>
-			<form method="post" class="form--connection">
+			<form method="post" class="form--connection" onsubmit="return confirm('Are you sure you want to change your password?');">
 
 				{% if app.user %}
 					<div class="mb-3">

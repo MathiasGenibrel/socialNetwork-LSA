@@ -8,14 +8,10 @@
 import "./images/Background--Connection.png"
 
 // any CSS you import will output into a single css file (app.css in this case)
-// import "./styles/app.css";
-import "./styles/reset.css";
 import "./styles/variables.css";
 import "./styles/fontStyles.css";
 import "./styles/formConnection.css";
-
-// import './styles/app.scss';
-// import './styles/post.css';
+import "./styles/changepass.css";
 
 // start the Stimulus application
 import "./bootstrap";

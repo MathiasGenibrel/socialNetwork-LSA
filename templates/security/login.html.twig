@@ -22,7 +22,7 @@
 				{% if app.user %}
 					<div class="mb-3">
 						You are logged in as
-						{# {{ app.user.username }}, #}
+						<b>{{ app.user.email }}</b>,
 						<a href="{{ path('app_logout') }}">Logout</a>
 					</div>
 				{% endif %}
@@ -51,6 +51,10 @@
 						<img id="passwordShow" hidden src="{{ asset('assets/icons/Show.svg') }}" alt="password hidden">
 					</div>
 				</label>
+
+				{% if app.user %}
+				<p>You want to change your password? <a href={{ path('app_user_changepass', {'id': app.user.id}) }} >Click Here</a></p>
+				{% endif %}
 
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 

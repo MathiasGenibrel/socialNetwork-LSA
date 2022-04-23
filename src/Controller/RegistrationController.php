@@ -27,16 +27,9 @@ class RegistrationController extends AbstractController
             
             $email = $user->getEmail();
 
-            if (str_ends_with($email, '@insider.fr')) { 
-                $role[] = 'ROLE_INSIDER';
-                $user->setRoles($role);
-            } elseif (str_ends_with($email, '@collaborator.fr')) {
-                $role[] = 'ROLE_COLLABORATOR';
-                $user->setRoles($role);
-            } elseif (str_ends_with($email, '@external.fr')) {
-                $role[] = 'ROLE_EXTERNAL';
-                $user->setRoles($role);
-            }
+            $role = $this->checkRole($email);
+            $user->setRoles($role);
+            
             // encode the plain password
             $user->setPassword(
             $userPasswordHasher->hashPassword(
@@ -60,5 +53,19 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+    }
+
+    private function checkRole(string $email) { 
+        if (str_ends_with($email, '@insider.fr')) { 
+            $role[] = 'ROLE_INSIDER';
+            return $role;
+        } elseif (str_ends_with($email, '@collaborator.fr')) {
+            $role[] = 'ROLE_COLLABORATOR';
+            return $role;
+        } elseif (str_ends_with($email, '@external.fr')) {
+            $role[] = 'ROLE_EXTERNAL';
+            return $role;
+        }
+
     }
 }

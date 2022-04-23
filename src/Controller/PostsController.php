@@ -91,7 +91,7 @@ class PostsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/', name: 'app_posts_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_posts_delete', methods: ['POST'])]
     public function delete(Request $request, Posts $post, PostsRepository $postsRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {

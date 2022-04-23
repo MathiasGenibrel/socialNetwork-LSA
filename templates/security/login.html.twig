@@ -53,7 +53,7 @@
 				</label>
 
 				{% if app.user %}
-				<p>You want to change your password? <a href={{ path('app_user_edit', {'id': app.user.id}) }} >Click Here</a></p>
+				<p>You want to change your password? <a href={{ path('app_user_changepass', {'id': app.user.id}) }} >Click Here</a></p>
 				{% endif %}
 
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">

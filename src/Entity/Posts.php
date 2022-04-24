@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PostsRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -34,6 +35,7 @@ class Posts
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->created_date = new DateTime();
     }
 
     public function __toString()

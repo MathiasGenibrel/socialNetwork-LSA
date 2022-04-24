@@ -32,6 +32,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'posted_by', targetEntity: Comments::class, orphanRemoval: true)]
     private $comments;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $status;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -138,6 +141,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $comment->setPostedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

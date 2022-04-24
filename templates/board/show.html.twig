@@ -3,28 +3,34 @@
 {% block title %}Board{% endblock %}
 
 {% block body %}
-    <h1>Board</h1>
+<div id="body" class="show">
+    <h1>Board {{ board.name }}</h1>
 
     <table class="table">
-        <tbody>
+        <thead>
             <tr>
                 <th>Id</th>
-                <td>{{ board.id }}</td>
-            </tr>
-            <tr>
                 <th>Name</th>
-                <td>{{ board.name }}</td>
+                <th>Created Date</th>
             </tr>
+        </thead>
+        <tbody>
             <tr>
-                <th>Created_date</th>
+                <td>{{ board.id }}</td>
+                <td>{{ board.name }}</td>
                 <td>{{ board.createdDate ? board.createdDate|date('Y-m-d') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_board_index') }}">back to list</a>
+    <a href="{{ path('app_board_index') }}">Back to list</a>
 
-    <a href="{{ path('app_board_edit', {'id': board.id}) }}">edit</a>
+    <a href="{{ path('app_board_edit', {'id': board.id}) }}">Edit</a>
 
-    {{ include('board/_delete_form.html.twig') }}
+    {% for role in app.user.roles %}
+        {% if role == 'ROLE_INSIDER' %}
+            {{ include('board/_delete_form.html.twig') }}
+        {% endif %}
+    {% endfor %}
+</div>
 {% endblock %}

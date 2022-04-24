@@ -3,15 +3,16 @@
 {% block title %}Category index{% endblock %}
 
 {% block body %}
+<div id="body">
     <h1>Category index</h1>
 
-    <table class="table">
+    <table class="table" id="table-list">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Created_date</th>
-                <th>actions</th>
+                <th>Created Date</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +33,6 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_category_new') }}">Create new</a>
+    <a href="{{ path('app_category_new') }}" id="create">Create new</a>
+</div>
 {% endblock %}

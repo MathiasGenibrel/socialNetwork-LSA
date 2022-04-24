@@ -1,17 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Change password
-{% endblock %}
-
-{% block stylesheets %}
-    {# {{ encore_entry_link_tags('changepass') }} #}
-{% endblock %}
+{% block title %}Change password{% endblock %}
 
 {% block body %}
+<div id="body">
+	<section class="connection__page">
+		<article>
+			<img src="{{ asset("assets/images/connection.svg") }}" alt="Connection with Rise Team's">
+			<h2>Start for free and get all news about Rise Team's.</h2>
+		</article>
+		<article>
+			<form method="post" class="form--connection" onsubmit="return confirm('Are you sure you want to change your password?');">
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+				{% if app.user %}
+					<div class="mb-3">
+						You are logged in as
+						<b>{{ app.user.email }}</b>,
+						<a href="{{ path('app_logout') }}">...Logout</a>
+					</div>
+					{% for role in app.user.roles %}
+						<div>
+							Role: {{role}}
+						</div>
+					{% endfor %}
+				{% endif %}
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+				<img src="{{ asset('assets/svg/Logo_Complete_dark.svg') }}" alt="logo">
+				<h4>Here You can change your password</h4>
+                {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+			</form>
+      <p>Rise Team's © 2022</p>
+		</article>
+	</section>
+</div>
 {% endblock %}

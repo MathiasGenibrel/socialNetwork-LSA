@@ -3,11 +3,21 @@
 {% block title %}Edit Category{% endblock %}
 
 {% block body %}
+<div id="body">
     <h1>Edit Category</h1>
-
+        {% for role in app.user.roles %}
+        <div>
+            Role: {{role}}
+        </div>
+    {% endfor %}
     {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_category_index') }}">back to list</a>
 
-    {{ include('category/_delete_form.html.twig') }}
+    {% for role in app.user.roles %}
+        {% if role == 'ROLE_INSIDER' %}
+            {{ include('category/_delete_form.html.twig') }}
+        {% endif %}
+    {% endfor %}
+</div>
 {% endblock %}

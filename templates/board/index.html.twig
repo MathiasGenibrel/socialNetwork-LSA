@@ -3,15 +3,16 @@
 {% block title %}Board index{% endblock %}
 
 {% block body %}
+<div id="body">
     <h1>Board index</h1>
 
-    <table class="table">
+    <table class="table" id="table-list">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Created_date</th>
-                <th>actions</th>
+                <th>Created Date</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,8 +22,8 @@
                 <td>{{ board.name }}</td>
                 <td>{{ board.createdDate ? board.createdDate|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_board_show', {'id': board.id}) }}">show</a>
-                    <a href="{{ path('app_board_edit', {'id': board.id}) }}">edit</a>
+                    <a href="{{ path('app_board_show', {'id': board.id}) }}">Show</a>
+                    <a href="{{ path('app_board_edit', {'id': board.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -32,6 +33,6 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_board_new') }}">Create new</a>
+    <a href="{{ path('app_board_new') }}" id="create">Create new</a>
+</div>
 {% endblock %}

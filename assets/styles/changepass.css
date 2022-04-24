@@ -3,5 +3,6 @@ article{
 }
 input{
     border: 1px solid var(--tertiary-color) !important;
-    min-height: 50px;
+    min-height: 32px;
+    margin-bottom: 1%;
 }

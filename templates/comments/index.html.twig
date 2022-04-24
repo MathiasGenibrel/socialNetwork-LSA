@@ -3,9 +3,10 @@
 {% block title %}Comments index{% endblock %}
 
 {% block body %}
+<div id="body">
     <h1>Comments index</h1>
 
-    <table class="table">
+    <table class="table" id="table-list">
         <thead>
             <tr>
                 <th>Id</th>
@@ -32,6 +33,6 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_comments_new') }}">Create new</a>
+    <a href="{{ path('app_comments_new') }}" id="create">Create new</a>
+</div>
 {% endblock %}

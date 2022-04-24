@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Board;
 use App\Form\BoardType;
 use App\Repository\BoardRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
@@ -58,7 +59,11 @@ class BoardController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_board_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Board $board, BoardRepository $boardRepository,SluggerInterface $slugger): Response
+    public function edit(Request $request, 
+                         Board $board, 
+                         BoardRepository $boardRepository,
+                         SluggerInterface $slugger,
+                         UserRepository $user): Response
     {
         $form = $this->createForm(BoardType::class, $board);
         $form->handleRequest($request);

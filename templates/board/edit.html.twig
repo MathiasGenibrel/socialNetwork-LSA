@@ -3,11 +3,18 @@
 {% block title %}Edit Board{% endblock %}
 
 {% block body %}
+<div id="body" class="board">
     <h1>Edit Board</h1>
 
-    {{ include('board/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="edit-form">
+        {{ include('board/_form.html.twig', {'button_label': 'Update'}) }}
+
+        {% for role in app.user.roles %}
+            {% if role == 'ROLE_INSIDER' %}
+                {{ include('board/_delete_form.html.twig') }}
+            {% endif %}
+        {% endfor %}
+    </div>
 
     <a href="{{ path('app_board_index') }}">back to list</a>
-
-    {{ include('board/_delete_form.html.twig') }}
-{% endblock %}
+</div>

@@ -4,23 +4,23 @@
 {% endblock %}
 {% block title %}Posts{% endblock %}
 
-
-
 {% block body %}
-    <h1 class="text-center"> Post: {{ post.title }} </h1>
-
+<div id="body" class="show">
+    <h1> Post: {{ post.title }} </h1>
     <table class="table">
-        <tbody>
+        <thead>
             <tr>
                 <th>Id</th>
-                <td>{{ post.id }}</td>
-            </tr>
-            <tr>
-                <th>Created_date</th>
-                <td>{{ post.createdDate ? post.createdDate|date('"F j, Y, g:i a"') : '' }}</td>
-            </tr>
-            <tr>
+                <th>Title</th>
+                <th>Created Date</th>
                 <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.createdDate ? post.createdDate|date('Y-m-d') : '' }}</td>
                 <td>{{ post.description }}</td>
             </tr>
         </tbody>
@@ -32,10 +32,13 @@
     {% endfor %}
     {{ include('comments/_form.html.twig') }}
 
-    
-    {# <a href="{{ path('app_posts_index') }}">back to list</a>
+    <a href="{{ path('app_posts_index') }}">Back to list</a>
+    <a href="{{ path('app_posts_edit', {'id': post.id}) }}">Edit</a>
 
-    <a href="{{ path('app_posts_edit', {'id': post.id}) }}">edit</a>
-
-    {{ include('posts/_delete_form.html.twig') }} #}
+    {% for role in app.user.roles %}
+        {% if role == 'ROLE_INSIDER' %}
+            {{ include('posts/_delete_form.html.twig') }}
+        {% endif %}
+    {% endfor %}
+</div>
 {% endblock %}

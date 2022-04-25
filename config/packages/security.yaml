@@ -38,11 +38,12 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/in, roles: ROLE_INSIDER }
-        - { path: ^/coll, roles: ROLE_COLLABORATOR }
-        - { path: ^/ex, roles: ROLE_EXTERNAL }
+        - { path: ^/user, roles: ROLE_INSIDER }
+        - { path: ^/board, roles: ROLE_COLLABORATOR }
+        # - { path: ^/ex, roles: ROLE_EXTERNAL }
     role_hierarchy:
-        ROLE_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN: ROLE_COLLABORATOR
+        ROLE_SUPER_ADMIN: ROLE_INSIDER
 
 when@test:
     security:

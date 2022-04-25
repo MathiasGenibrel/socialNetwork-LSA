@@ -1,7 +1,17 @@
 {{ form_start(form) }}
-    <div>{{ form_row(form.email) }}</div>
-    <div>{{ form_row(form.password) }}</div>
-    <div>{{ form_row(form.roles) }}</div>
-    <div>{{ form_rest(form) }}</div>
+<div class="row">
+    <div class="col-6">
+        <div >{{ form_row(form.email) }}</div>
+        <div>{{ form_row(form.password) }}</div>
+        <div>{{ form_row(form.status) }}</div>
+    </div>
+    <div class="col-6">
+        <div>{{ form_row(form.roles) }}</div>
+ 
+        <div>{{ form_rest(form) }}</div>
+    </div>
+</div>
+  
+
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

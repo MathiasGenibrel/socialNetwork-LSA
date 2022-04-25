@@ -65,6 +65,9 @@ class RegistrationController extends AbstractController
         } elseif (str_ends_with($email, '@external.fr')) {
             $role[] = 'ROLE_EXTERNAL';
             return $role;
+        }else{
+            $role[] = 'ROLE_USER';
+            return $role;
         }
 
     }

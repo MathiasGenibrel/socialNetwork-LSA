@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -78,7 +79,9 @@ class UserController extends AbstractController
     public function edit(Request $request, User $user, UserRepository $userRepository,UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $form = $this->createFormBuilder($user)
-            ->add('email',TextType::class)
+            ->add('email',TextType::class,[
+                'attr'  =>  array(
+                    'class' => 'form-control',)])
             ->add('roles',ChoiceType::class,[
                 'attr'  =>  array(
                     'class' => 'form-control',
@@ -88,8 +91,12 @@ class UserController extends AbstractController
             ])
             ->add('password',PasswordType::class,[
                 'attr' => [
+                    'class' => 'form-control',
                     'placeholder' => 'Enter your new password '
                 ]
+            ])
+            ->add('status',CheckboxType::class,[
+                "label" => 'Actif'
             ])
             ->getForm();
         $form->handleRequest($request);
@@ -102,6 +109,7 @@ class UserController extends AbstractController
                   $form->get('password')->getData()
                 ));   
             $user->setRoles($form->get('roles')->getData());
+            $user->setStatus($form->get('status')->getData());
             $userRepository->add($user);
 
             return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);

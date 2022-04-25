@@ -15,7 +15,7 @@ class HomeController extends AbstractController
     public function index(BoardRepository $boardRepository,PostsRepository $post): Response
     {
         $authChecker = $this->container->get('security.authorization_checker');
-        if (($authChecker->isGranted('ROLE_INSIDER') === true) || ($authChecker->isGranted('ROLE_COLLABORATOR') === true || ($authChecker->isGranted('ROLE_EXTERNAL') === true))) { 
+        if (($authChecker->isGranted('ROLE_INSIDER') === true) || ($authChecker->isGranted('ROLE_USER') === true) || ($authChecker->isGranted('ROLE_COLLABORATOR') === true || ($authChecker->isGranted('ROLE_EXTERNAL') === true))) { 
             return $this->render('home/index.html.twig', [
                 'boards' => $boardRepository->findAll(),
             ]);

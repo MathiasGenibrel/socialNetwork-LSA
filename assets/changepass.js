@@ -12,6 +12,7 @@ import "./styles/variables.css";
 import "./styles/fontStyles.css";
 import "./styles/formConnection.css";
 import "./styles/changepass.css";
+import "./styles/styles.css";
 
 // start the Stimulus application
 import "./bootstrap";

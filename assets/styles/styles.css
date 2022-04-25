@@ -1,0 +1,62 @@
+/*All Page*/
+#body > h1{
+    color: sandybrown;
+}
+
+#form, a{
+    margin: 1%;
+}
+
+.btn{
+    cursor: pointer;
+    margin-top: 1%;
+}
+
+/*Show Page*/
+.table{
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1%;
+}
+
+.table td, .table th{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table tr{
+    background-color: #ffffff;
+}
+
+.table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #ddd;
+}
+
+.table th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #f5f3f3;
+}
+
+.show > a{
+    color: rgb(64, 64, 145);
+    margin: 0 1% 1% 0;
+}
+
+.show > a:hover{
+    text-decoration: underline;
+}
+
+#body > #create{
+    margin: 0;
+    color: rgb(64, 64, 145);
+}
+
+#body > #create:hover{
+    text-decoration: underline;
+}

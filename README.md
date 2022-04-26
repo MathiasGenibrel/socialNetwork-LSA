@@ -125,10 +125,10 @@ When you access to a category, you can see the list of posts.
 
 ## Contact
 
-Randa Ragheb - [Contact](randa.ragheb@livecampus.tech) <br>
-Chris Centaure - [Contact](chris.centaure@livecampus.tech) <br>
-Mateo Dubernet - [Contact](mateo.dubernet@livecampus.tech) <br>
-Mathias Genibrel - [Contact](mathias.genibrel@livecampus.tech) <br>
+Randa Ragheb - [Contact](mailto randa.ragheb@livecampus.tech) <br>
+Chris Centaure - [Contact](mailto chris.centaure@livecampus.tech) <br>
+Mateo Dubernet - [Contact](mailto mateo.dubernet@livecampus.tech) <br>
+Mathias Genibrel - [Contact](mailto mathias.genibrel@livecampus.tech) <br>
 
 Project Requirement: [specifications](./Projet%20Symfony.pdf)
 

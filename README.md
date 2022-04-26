@@ -130,7 +130,7 @@ At registration you can register with three different domains:
 ![Register Screen Shot](./assets/images/register.png)
 
 When you are logged in, you will be able to see the home page.
-![Home Screen Shot](./assets/images/home.png)
+![Home Screen Shot](./assets/images/Home.png)
 
 In this case, you can move to board to create new Category if you are insider or admin.
 ![Create Category Screen Shot](./assets/images/Home_NavBar_Board.png)

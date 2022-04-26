@@ -107,6 +107,26 @@ Normaly, you land on the login page.
 ![Login Screen Shot](./assets/images/login.png)
 
 And you can go to the registration page by clicking on the link `Register now`
+
+At registration you can register with three different domains:
+```json
+// Example of creation account => chris.centaure@insider.fr
+  [
+    {
+      "role": "Insider",
+      "domain": "insider.fr",
+    }
+    {
+      "role": "Collaborator",
+      "domain": "collaborator.fr",
+    }
+    {
+      "role": "External",
+      "domain": "external.fr",
+    }
+  ]
+```
+
 ![Register Screen Shot](./assets/images/register.png)
 
 When you are logged in, you will be able to see the home page.
@@ -125,10 +145,10 @@ When you access to a category, you can see the list of posts.
 
 ## Contact
 
-Randa Ragheb - [Contact](mailto randa.ragheb@livecampus.tech) <br>
-Chris Centaure - [Contact](mailto chris.centaure@livecampus.tech) <br>
-Mateo Dubernet - [Contact](mailto mateo.dubernet@livecampus.tech) <br>
-Mathias Genibrel - [Contact](mailto mathias.genibrel@livecampus.tech) <br>
+Randa Ragheb - [Contact](mailto:randa.ragheb@livecampus.tech) <br>
+Chris Centaure - [Contact](mailto:chris.centaure@livecampus.tech) <br>
+Mateo Dubernet - [Contact](mailto:mateo.dubernet@livecampus.tech) <br>
+Mathias Genibrel - [Contact](mailto:mathias.genibrel@livecampus.tech) <br>
 
 Project Requirement: [specifications](./Projet%20Symfony.pdf)
 
